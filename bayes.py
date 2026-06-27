@@ -1,6 +1,6 @@
 from typing import cast
 
-type nameType = int|float|str
+type nameType = int|float|str|Suite
 
 class Suite:
 
@@ -58,8 +58,6 @@ class Suite:
             assert 0, "Not Implemented"
     
     def confidence(self, percentage: float):
-        print(.5-percentage/2)
-        print(.5+percentage/2)
         min_ = self.percentile(.5-percentage/2)
         max_ = self.percentile(.5+percentage/2)
         return (min_, max_)
