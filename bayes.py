@@ -19,7 +19,7 @@ class Suite:
         self.hypos[hypo] = prob
 
     def prob(self, hypo: nameType):
-        return self.hypos.get(hypo)
+        return self.hypos[hypo]
     
     def likelihood(self, data: nameType, hypo: nameType) -> float:
         raise NotImplementedError()
@@ -30,8 +30,8 @@ class Suite:
 
     def normalize(self):
         x = sum(self.hypos.values())
-        for hypo, prob in self.hypos.items():
-            self.hypos.update({hypo: prob/x})
+        for hypo in self.hypos:
+            self.hypos[hypo] /= x
         return x
     
     def mode(self):
@@ -53,7 +53,7 @@ class Suite:
             for hypo, prob in self.hypos.items():
                 hypo = cast(float, hypo)
                 total += hypo * prob
-            return total/len(self.hypos)
+            return total
         else:
             assert 0, "Not Implemented"
     
